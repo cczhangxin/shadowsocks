@@ -1,0 +1,35 @@
+git init 命令把这个目录变成Git可以管理的仓库
+
+git clone https://git.antiy.org.cn/dataexchanger-cncert/dexch2-dist.git 克隆仓库
+
+git remote add origin https://github.com/cczhangxin/antiy.git 关联仓库
+
+git fetch origin name 克隆分支代码
+
+git log 查看提交历史
+
+git reset --hard 5bc3ae 版本回退
+
+git pull origin name 更新本地的代码到服务器分支最新状态
+
+git add 123.txt 456.js 提交文件到暂存区
+
+git commit -m "增加内容提示" 将暂存区的所有内容提交到当前分支
+
+git checkout -b name 创建切换分支
+
+git status 查看暂存区状态
+
+git diff 查看修改内容
+
+git branch 查看分支
+
+git branch name 创建分支
+
+git checkout name 切换分支
+
+git branch -d name 删除分支
+
+git merge master 将master的分支合并进自己的分支
+
+git push origin name 提交分支到服务器（加-f强推）

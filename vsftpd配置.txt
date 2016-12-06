@@ -1,0 +1,39 @@
+CentOS7.0 下安装vsftpd
+
+
+检查
+rpm -qa | grep vsftpd（查看是否已经安装vsftpd）
+yum -y install vsftpd（安装）  yum remove vsftpd（卸载）
+
+
+配置防火墙
+systemctl stop firewalld.service （停止 firewall 服务）
+systemctl disable firewalld.service 禁止 firewall 开机启动
+yum install -y iptables 安装 iptables
+vi /etc/sysconfig/iptables 编辑防火墙配置文件
+（添加）-A INPUT -p tcp -m state --state NEW -m tcp --dport 21 -j ACCEPT
+systemctl start iptables.service 启动 iptables 服务
+systemctl enable iptables.service 设置开机启动
+
+
+限制访问上级目录
+vi /etc/vsftpd/vsftpd.conf
+（添加）local_root=/var/ftp 
+（添加）chroot_list_enable=yes 
+vi /etc/vsftpd/user_list
+（添加）用户名
+新建用户指定目录
+useradd -d /home -g ftp -s /sbin/nologin 用户名
+
+
+常用命令
+vi /etc/vsftpd/vsftpd.conf （主配置文件）
+vi /etc/vsftpd/ftpusers（指定哪些用户不能访问FTP服务器）
+vi /etc/vsftpd/user_list（指定的用户是否可以访问ftp服务器由vsftpd.conf文件中的userlist_deny的取值来决定）
+cat /etc/passwd |cut -f 1 -d :（查看用户）
+useradd test（添加用户）
+passwd test（修改用户密码）
+userdel test123（删除用户）
+/bin/systemctl restart vsftpd.service（重启vsftpd）
+chmod -R 777 /home/（此目录下所有文件和子目录的读、写、执行权限）
+chgrp -R ftp /home/（把此目录及该目录下所有文件和子目录的组属性设置成ftp组）
