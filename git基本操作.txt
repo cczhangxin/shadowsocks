@@ -32,4 +32,4 @@ git branch -d name 删除分支
 
 git merge master 将master的分支合并进自己的分支
 
-git push origin name 提交分支到服务器（加-f强推）
+git push origin name 提交分支到服务器（加-F强推）
